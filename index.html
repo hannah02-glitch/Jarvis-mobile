@@ -90,6 +90,12 @@
     } else if (words.includes("open youtube")) {
   answer = "Opening YouTube now, sir.";
   window.open("https://www.youtube.com", "_blank");
+} else if (words.includes("open snapchat")) {
+  answer = "Opening Snapchat, sir.";
+  window.open("snapchat://", "_self");
+} else if (words.includes("open tiktok")) {
+  answer = "Opening TikTok, sir.";
+  window.open("snssdk1233://", "_self");
 } else {
   answer = "I heard you say " + words +
     ". I don't know that command yet, sir.";
