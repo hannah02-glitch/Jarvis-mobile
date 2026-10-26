@@ -52,23 +52,64 @@
       }
     }
       function listenToMe() {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-      recognition.lang = "en-AU";
-      recognition.onresult = function(event) {
-        const words = event.results[0][0].transcript;
-        document.getElementById("reply").textContent = "You said: " + words;
+  if (!SpeechRecognition) {
+    speak("Sorry, sir. Voice recognition is not supported here.");
+    return;
+  }
 
-        const speech = new SpeechSynthesisUtterance("I heard you say " + words + ", sir.");
-        window.speechSynthesis.speak(speech);
-      };
+  const recognition = new SpeechRecognition();
+  recognition.lang = "en-AU";
 
-      recognition.onerror = function() {
-        document.getElementById("reply").textContent = "Sorry, sir. I couldn't hear you.";
-      };
+  recognition.onresult = function(event) {
+    const words = event.results[0][0].transcript.toLowerCase().trim();
+    let answer;
 
-      recognition.start();
+    if (words.includes("hello") || words.includes("hi jarvis")) {
+      answer = "Hello, sir. How can I help you?";
+    } else if (words.includes("how are you")) {
+      answer = "All systems are running normally, sir.";
+    } else if (words.includes("time")) {
+      answer = "The time is " +
+        new Date().toLocaleTimeString("en-AU", {
+          hour: "numeric",
+          minute: "2-digit"
+        }) + ", sir.";
+    } else if (words.includes("date") || words.includes("day is it")) {
+      answer = "Today is " +
+        new Date().toLocaleDateString("en-AU", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }) + ", sir.";
+    } else if (words.includes("your name")) {
+      answer = "My name is JARVIS, sir. At your service.";
+    } else {
+      answer = "I heard you say " + words +
+        ". I don't know that command yet, sir.";
     }
+
+    document.getElementById("reply").textContent = answer;
+    speak(answer);
+  };
+
+  recognition.onerror = function() {
+    document.getElementById("reply").textContent =
+      "Sorry, sir. I couldn't hear you.";
+  };
+
+  recognition.start();
+}
+
+function speak(message) {
+  const speech = new SpeechSynthesisUtterance(message);
+  speech.lang = "en-AU";
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(speech);
+}
   </script>
 </body>
 </html>
