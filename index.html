@@ -96,6 +96,11 @@
 }
 
     document.getElementById("reply").textContent = answer;
+
+if (words.includes("open youtube")) {
+  document.getElementById("reply").innerHTML =
+    'Opening YouTube, sir. <a href="https://www.youtube.com" target="_blank">Tap here to open YouTube</a>';
+}
     speak(answer);
   };
 
