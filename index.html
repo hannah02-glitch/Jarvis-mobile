@@ -95,13 +95,14 @@
     ". I don't know that command yet, sir.";
 }
 
-    document.getElementById("reply").textContent = answer;
-
-if (words.includes("open youtube")) {
+    if (words.includes("open youtube")) {
   document.getElementById("reply").innerHTML =
     'Opening YouTube, sir. <a href="https://www.youtube.com" target="_blank">Tap here to open YouTube</a>';
+} else {
+  document.getElementById("reply").textContent = answer;
 }
-    speak(answer);
+
+speak(answer);
   };
 
   recognition.onerror = function() {
