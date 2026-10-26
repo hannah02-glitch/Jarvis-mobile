@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JARVIS</title>
+  <style>
+    body {
+      background: #050b16;
+      color: #62dcff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px 15px;
+    }
+    .panel {
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 25px;
+      border: 1px solid #168cc2;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #168cc255;
+    }
+    button {
+      background: #10314a;
+      color: white;
+      border: 1px solid #62dcff;
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-size: 16px;
+      margin: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>J.A.R.V.I.S.</h1>
+  <p>PERSONAL ASSISTANT SYSTEM</p>
+
+  <div class="panel">
+    <p id="reply">Good evening, sir. I am online.</p>
+    <button onclick="greet()">Test JARVIS</button>
+  </div>
+
+  <script>
+    function greet() {
+      const message = "At your service, sir.";
+      document.getElementById("reply").textContent = message;
+
+      if ("speechSynthesis" in window) {
+        const speech = new SpeechSynthesisUtterance(message);
+        window.speechSynthesis.speak(speech);
+      }
+    }
+  </script>
+</body>
+</html>
