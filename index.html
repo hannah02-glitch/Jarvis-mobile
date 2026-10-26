@@ -65,7 +65,9 @@
 
   recognition.onresult = function(event) {
     const words = event.results[0][0].transcript.toLowerCase().trim();
+console.log("JARVIS heard:", words);
     let answer;
+document.getElementById("reply").textContent = "I heard: " + words;
 
     if (words.includes("hello") || words.includes("hi jarvis")) {
       answer = "Hello, sir. How can I help you?";
