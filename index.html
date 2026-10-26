@@ -87,10 +87,13 @@
         }) + ", sir.";
     } else if (words.includes("your name")) {
       answer = "My name is JARVIS, sir. At your service.";
-    } else {
-      answer = "I heard you say " + words +
-        ". I don't know that command yet, sir.";
-    }
+    } else if (words.includes("open youtube")) {
+  answer = "Opening YouTube now, sir.";
+  window.open("https://www.youtube.com", "_blank");
+} else {
+  answer = "I heard you say " + words +
+    ". I don't know that command yet, sir.";
+}
 
     document.getElementById("reply").textContent = answer;
     speak(answer);
